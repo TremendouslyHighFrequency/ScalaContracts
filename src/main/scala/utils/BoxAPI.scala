@@ -16,7 +16,7 @@ import org.apache.http.entity.{ContentType, StringEntity}
 import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
 import org.ergoplatform.ErgoBox
-import org.ergoplatform.appkit.{ErgoId, InputBox}
+import org.ergoplatform.appkit.InputBox
 import org.ergoplatform.appkit.impl.{InputBoxImpl, ScalaBridge}
 import org.ergoplatform.explorer.client.model.OutputInfo
 import org.ergoplatform.restapi.client.{Asset, ErgoTransactionOutput, Registers}

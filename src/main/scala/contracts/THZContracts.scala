@@ -5,7 +5,7 @@ import enumeratum._
 import scala.collection.immutable
 import scala.io.Source
 
-sealed trait YourProjectContracts extends EnumEntry {
+sealed trait THZContracts extends EnumEntry {
   // Top Folder
   val domain: String = ""
   // Sub Folder
@@ -52,24 +52,20 @@ sealed trait YourProjectContracts extends EnumEntry {
   }
 }
 
-object YourProjectContracts extends Enum[YourProjectContracts] {
-  val values: immutable.IndexedSeq[YourProjectContracts] = findValues
-  case object StateContract extends NFTBoxGuardScriptContract
-  case object IssuerContract extends NFTBoxGuardScriptContract
-  case object CollectionIssuer extends NFTBoxGuardScriptContract
-  case object CollectionIssuance extends NFTBoxGuardScriptContract
-  case object SingletonIssuer extends NFTBoxGuardScriptContract
-  case object SingletonIssuance extends NFTBoxGuardScriptContract
-  case object AVLdebug extends NFTBoxGuardScriptContract
-  case object ProxyContract extends ProxyContractBoxGuardScriptContract
+object THZContracts extends Enum[THZContracts] {
+  val values: immutable.IndexedSeq[THZContracts] = findValues
+  case object Bootstrap extends NFTBoxGuardScriptContract
+  case object IndicationToWithdraw extends NFTBoxGuardScriptContract
+  case object Sale extends NFTBoxGuardScriptContract
+  case object WithdrawToken extends NFTBoxGuardScriptContract
 }
 
-sealed trait NFTContract extends YourProjectContracts {
-  override val domain: String = "YourProject"
+sealed trait NFTContract extends THZContracts {
+  override val domain: String = "thz"
 }
 
-sealed trait ProxyContract extends YourProjectContracts {
-  override val domain: String = "YourProject"
+sealed trait ProxyContract extends THZContracts {
+  override val domain: String = "thz"
 }
 
 //</editor-fold>
