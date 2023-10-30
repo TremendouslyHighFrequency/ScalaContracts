@@ -2,9 +2,13 @@ package main
 
 import contracts.THZContracts
 import execute.Client
-import org.ergoplatform.appkit.Address
+import org.ergoplatform.appkit.scalaapi.ErgoValueBuilder
+import org.ergoplatform.appkit.{Address, ErgoValue}
+import org.ergoplatform.sdk.ErgoToken
 import scorex.crypto.encode.Base16
 import scorex.crypto.hash
+import sigmastate.eval.Colls
+import special.collection.Coll
 import utils.ContractCompile
 
 object Playground extends App {
@@ -17,18 +21,31 @@ object printContract extends App {
   val ctx = client.getContext
   val compiler = new ContractCompile(ctx)
 
-  val indicationToWithdrawScript = THZContracts.IndicationToWithdraw.contractScript
-  val indicationToWithdrawContract = compiler.compileDummyContract(indicationToWithdrawScript) // compile(INDICATION_TO_WITHDRAW_TEMPLATE, { version: 0, includeSize: false });
-  val indicationToWithdrawnAddress = indicationToWithdrawContract.toAddress.toString
-  val indicationToWithdrawErgoTree = indicationToWithdrawContract.getErgoTree.bytes
-  val indicationToWithdrawErgoTreeHex = indicationToWithdrawContract.getErgoTree.bytesHex
-  val indicationToWithdrawErgoTreeHash = hash.Blake2b256(indicationToWithdrawErgoTree)
-  val indicationToWithdrawErgoTreeHashHex = Base16.encode(indicationToWithdrawErgoTreeHash)
+  val indicationToWithdrawScript =
+    THZContracts.IndicationToWithdraw.contractScript
+  val indicationToWithdrawContract = compiler.compileDummyContract(
+    indicationToWithdrawScript
+  ) // compile(INDICATION_TO_WITHDRAW_TEMPLATE, { version: 0, includeSize: false });
+  val indicationToWithdrawnAddress =
+    indicationToWithdrawContract.toAddress.toString
+  val indicationToWithdrawErgoTree =
+    indicationToWithdrawContract.getErgoTree.bytes
+  val indicationToWithdrawErgoTreeHex =
+    indicationToWithdrawContract.getErgoTree.bytesHex
+  val indicationToWithdrawErgoTreeHash =
+    hash.Blake2b256(indicationToWithdrawErgoTree)
+  val indicationToWithdrawErgoTreeHashHex =
+    Base16.encode(indicationToWithdrawErgoTreeHash)
 
-  println(s"Indication To Withdraw Contract Address: $indicationToWithdrawnAddress")
-  println(s"Indication To Withdraw Contract ErgoTree: $indicationToWithdrawErgoTreeHex")
-  println(s"Indication To Withdraw Contract ErgoTree Blake Hash Hex: $indicationToWithdrawErgoTreeHashHex")
-
+  println(
+    s"Indication To Withdraw Contract Address: $indicationToWithdrawnAddress"
+  )
+  println(
+    s"Indication To Withdraw Contract ErgoTree: $indicationToWithdrawErgoTreeHex"
+  )
+  println(
+    s"Indication To Withdraw Contract ErgoTree Blake Hash Hex: $indicationToWithdrawErgoTreeHashHex"
+  )
 
   val withdrawTokenScript = THZContracts.WithdrawToken.contractScript
   val withdrawTokenContract = compiler.compileDummyContract(withdrawTokenScript)
@@ -40,8 +57,9 @@ object printContract extends App {
 
   println(s"Withdraw Token Contract Address: $withdrawTokenAddress")
   println(s"Withdraw Token Contract ErgoTree: $withdrawTokenErgoTreeHex")
-  println(s"Withdraw Token Contract ErgoTree Blake Hash Hex: $withdrawTokenErgoTreeHashHex")
-
+  println(
+    s"Withdraw Token Contract ErgoTree Blake Hash Hex: $withdrawTokenErgoTreeHashHex"
+  )
 
   val SaleScript = THZContracts.Sale.contractScript
   val SaleContract = compiler.compileDummyContract(SaleScript)
@@ -55,7 +73,6 @@ object printContract extends App {
   println(s"Sale Contract ErgoTree: $SaleErgoTreeHex")
   println(s"Sale Contract ErgoTree Blake Hash Hex: $SaleErgoTreeHashHex")
 
-
   val BootstrapScript = THZContracts.Bootstrap.contractScript
   val BootstrapContract = compiler.compileDummyContract(BootstrapScript)
   val BootstrapAddress = BootstrapContract.toAddress.toString
@@ -66,7 +83,23 @@ object printContract extends App {
 
   println(s"Bootstrap Contract Address: $BootstrapAddress")
   println(s"Bootstrap Contract ErgoTree: $BootstrapErgoTreeHex")
-  println(s"Bootstrap Contract ErgoTree Blake Hash Hex: $BootstrapErgoTreeHashHex")
+  println(
+    s"Bootstrap Contract ErgoTree Blake Hash Hex: $BootstrapErgoTreeHashHex"
+  )
 
+}
+
+object r7 extends App {
+  val withdrawNFTId =
+    "3b33f8be408cba219669101baf388c5a54595a9a4c8a14910ad423c6b9d64fb6"
+  val token = new ErgoToken(withdrawNFTId, 1L)
+  val withdrawNFTIdBytes = token.id.getBytes
+
+  val tokenColl = Colls.fromArray(withdrawNFTIdBytes)
+
+  val registerType = ErgoValueBuilder.buildFor((tokenColl, 1L))
+  val registerTypeHex = registerType.toHex
+
+  println(registerTypeHex)
 
 }
