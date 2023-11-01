@@ -50,5 +50,5 @@
 /////////////////////
 
 /////ErgoTree Blake2b256 Hash Hex/////
-//68cf77da657c3cc2b18a3cd0b05764f6dd0a0aa7b660c7b63a79c6f03f380e41
+//68CF77DA657C3CC2B18A3CD0B05764F6DD0A0AA7B660C7B63A79C6F03F380E41
 //////////////////////
