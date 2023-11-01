@@ -1,7 +1,7 @@
 {
 	val swampAudioNode            = PK("9iAp6nJugJciwfZK5rDt4civh4jnnT13j4fXoBLqscC7GRbpt5s").propBytes
 	val withdrawFee               = 10000000L
-	val withdrawIndictationScript = fromBase16("765237a71b426b379adff61a613bf3d462a7dd0767b71ae8a907032d53e79905")
+	val withdrawIndictationScript = fromBase16("765237A71B426B379ADFF61A613BF3D462A7DD0767B71AE8A907032D53E79905")
 
 	val heldERG0              = SELF.value
 	val heldTokens0           = SELF.tokens
